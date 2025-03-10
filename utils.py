@@ -62,7 +62,7 @@ def getAllFronterInfo(fronterList, customFronterList, UID):
 
 # here and below would be in other files
 # replace with your own path, start at the root of the project
-token = getToken("Utils/token.json")
+token = getToken("token.json")
 
 # set up for making requests
 payload= {}
