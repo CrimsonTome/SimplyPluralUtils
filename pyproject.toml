@@ -1,0 +1,9 @@
+[project]
+name = "simplypluralutils"
+version = "0.1.0"
+description = "Utilities for working with the Simply Plural API with Python"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "requests>=2.32.3",
+]
