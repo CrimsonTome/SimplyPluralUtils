@@ -3,7 +3,10 @@ jobs:
   test:
     runs-on: docker
     container:
-        image: ghcr.io/astral-sh/ruff
+        image: debian:stable-slim
     steps:
-      - run: ruff check --fix
-      - run: ruff format
+      - run: apt update -y && apt install -y curl
+      - run: curl -LsSf https://astral.sh/uv/install.sh | sh
+      - run: source $HOME/.local/bin/env
+      - run: uvx ruff check --fix
+      - run: uvx ruff format
