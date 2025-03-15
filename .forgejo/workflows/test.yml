@@ -5,8 +5,8 @@ jobs:
     container:
         image: debian:stable-slim
     steps:
-      - uses: actions/checkout@v3
-      - run: apt-get update -y >/dev/null && apt-get install -y curl > /dev/null
+      - run: apt-get update -y >/dev/null && apt-get install -y curl nodejs> /dev/null
+      - uses: actions/checkout@v3s
       - run: curl -LsSf https://astral.sh/uv/install.sh | sh
       - run: . "$HOME/.local/bin/env"
       - run: uvx ruff check --fix
