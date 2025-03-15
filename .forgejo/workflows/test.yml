@@ -5,9 +5,15 @@ jobs:
     container:
         image: debian:stable-slim
     steps:
-      - run: apt-get update -y >/dev/null && apt-get install -y curl nodejs> /dev/null
-      - uses: actions/checkout@v3
-      - run: curl -LsSf https://astral.sh/uv/install.sh | sh
-      - run: . "$HOME/.local/bin/env"
-      - run: uvx ruff check --fix
-      - run: uvx ruff format
+      - name: install dependencies
+        run: apt-get update -y >/dev/null && apt-get install -y curl nodejs> /dev/null
+      - name: checkout code
+        uses: actions/checkout@v3
+      - name: install uv
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          run: . "$HOME/.local/bin/env"
+      - name: ruff formatting 
+        run: | 
+          uvx ruff check --fix 
+          uvx ruff format
