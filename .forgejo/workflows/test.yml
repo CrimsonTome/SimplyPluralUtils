@@ -6,11 +6,11 @@ jobs:
         image: debian:stable-slim
     steps:
       - name: install dependencies
-        run: apt-get update -y >/dev/null && apt-get install -y curl nodejs> /dev/null
+        run: apt-get update -y >/dev/null && apt-get install -y curl git > /dev/null
       - name: checkout code
-        uses: actions/checkout@v3
-        with:
-          repository: 'crimsontome/SimplyPluralUtils'
+        run: |
+          git clone https://git.crimsontome.com/crimsontome/SimplyPluralUtils.git
+          cd SimplyPluralUtils        
       - name: install uv
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
