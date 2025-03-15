@@ -5,7 +5,7 @@ jobs:
     container:
         image: debian:stable-slim
     steps:
-      - run: apt update -y && apt install -y curl
+      - run: apt-get update -y >/dev/null && apt-get install -y curl > /dev/null
       - run: curl -LsSf https://astral.sh/uv/install.sh | sh
       - run: . "$HOME/.local/bin/env"
       - run: uvx ruff check --fix
