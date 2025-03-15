@@ -9,6 +9,8 @@ jobs:
         run: apt-get update -y >/dev/null && apt-get install -y curl nodejs> /dev/null
       - name: checkout code
         uses: actions/checkout@v3
+        with:
+          repository: 'https://git.crimsontome.com/crimsontome/SimplyPluralUtils'
       - name: install uv
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
