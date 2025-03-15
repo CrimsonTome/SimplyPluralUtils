@@ -10,7 +10,7 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v3
         with:
-          repository: 'https://git.crimsontome.com/crimsontome/SimplyPluralUtils'
+          repository: 'crimsontome/SimplyPluralUtils'
       - name: install uv
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
