@@ -5,4 +5,5 @@ jobs:
     container:
         image: ghcr.io/astral-sh/ruff
     steps:
-      - run: ruff check
+      - run: ruff check --fix
+      - run: ruff format

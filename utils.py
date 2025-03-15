@@ -6,6 +6,7 @@ from pathlib import Path
 
 SIMPLY_PLURAL_BASE_URL = "https://api.apparyllis.com/v1"
 
+
 # return the token from the user's token file
 def getToken(userPath):
     tokenPath = Path(userPath)
@@ -13,12 +14,16 @@ def getToken(userPath):
         token = json.load(tokenFile)
         return token
 
+
 # returns a list of all fronter IDs from the /fronters endpoint
 # https://docs.apparyllis.com/docs/api/get-current-fronters-self
 def getAllFronterID():
-    response = requests.get(f"{SIMPLY_PLURAL_BASE_URL}/fronters", headers=headers, data=payload, timeout=10)
+    response = requests.get(
+        f"{SIMPLY_PLURAL_BASE_URL}/fronters", headers=headers, data=payload, timeout=10
+    )
     fronters = json.loads(response.text)
     return fronters
+
 
 # returns a list of fronter IDs from the fronters list
 def craftFronterIDList(fronters):
@@ -29,7 +34,8 @@ def craftFronterIDList(fronters):
     ]
     return fronter_id_list
 
-# returns a list of custom fronter IDs from the fronters list 
+
+# returns a list of custom fronter IDs from the fronters list
 def craftCustomFronterIDList(fronters):
     custom_fronter_id_list = [
         item["content"]["member"]
@@ -38,42 +44,65 @@ def craftCustomFronterIDList(fronters):
     ]
     return custom_fronter_id_list
 
+
 # returns the stripped system ID using the first fronter
 # you can also use the /me endpoint to get the system ID with some more filtering
 def getUID(fronters):
     return fronters[0]["content"]["uid"]
 
+
 # returns a list of fronter names and avatar URLs from both the fronter list and custom fronter list
 def getAllFronterInfo(fronterList, customFronterList, UID):
     fronterListConc = []
     for i in range(len(fronterList)):
-        response = requests.get(f"{SIMPLY_PLURAL_BASE_URL}/member/{UID}/{fronterList[i]}", headers=headers, data=payload, timeout=10)
+        response = requests.get(
+            f"{SIMPLY_PLURAL_BASE_URL}/member/{UID}/{fronterList[i]}",
+            headers=headers,
+            data=payload,
+            timeout=10,
+        )
         content = json.loads(response.text)
         name = content["content"]["name"]
         avatar = content["content"]["avatarUrl"]
         fronterListConc.append((name, avatar))
     for i in range(len(customFronterList)):
-        response = requests.get(f"{SIMPLY_PLURAL_BASE_URL}/customfront/{UID}/{customFronterList[i]}", headers=headers, data=payload, timeout=10)
+        response = requests.get(
+            f"{SIMPLY_PLURAL_BASE_URL}/customfront/{UID}/{customFronterList[i]}",
+            headers=headers,
+            data=payload,
+            timeout=10,
+        )
         content = json.loads(response.text)
         name = content["content"]["name"]
         avatar = content["content"]["avatarUrl"]
-        fronterListConc.append((name,avatar))
+        fronterListConc.append((name, avatar))
     return fronterListConc
+
+
+def getChainAllFronterInfo():
+    fronters = getAllFronterID()
+    fronterList = craftFronterIDList(fronters)
+    customFronterList = craftCustomFronterIDList(fronters)
+    UID = getUID(fronters)
+    allFronterList = getAllFronterInfo(fronterList, customFronterList, UID)
+    return allFronterList
+
 
 # here and below would be in other files
 # replace with your own path, start at the root of the project
 token = getToken("token.json")
 
 # set up for making requests
-payload= {}
+payload = {}
 headers = {"Authorization": token["SimplyPluralAPIKey"]}
 
-fronters = getAllFronterID()
+# fronters = getAllFronterID()
 
-fronterList = craftFronterIDList(fronters)
-customFronterList = craftCustomFronterIDList(fronters)
+# fronterList = craftFronterIDList(fronters)
+# customFronterList = craftCustomFronterIDList(fronters)
 
-UID = getUID(fronters)
+# UID = getUID(fronters)
 
-allFronterList = getAllFronterInfo(fronterList,customFronterList, UID)
-print(allFronterList)
+# allFronterList = getAllFronterInfo(fronterList,customFronterList, UID)
+# print(allFronterList)
+print(getChainAllFronterInfo("token.json"))
