@@ -96,13 +96,3 @@ token = getToken("token.json")
 payload = {}
 headers = {"Authorization": token["SimplyPluralAPIKey"]}
 
-# fronters = getAllFronterID()
-
-# fronterList = craftFronterIDList(fronters)
-# customFronterList = craftCustomFronterIDList(fronters)
-
-# UID = getUID(fronters)
-
-# allFronterList = getAllFronterInfo(fronterList,customFronterList, UID)
-# print(allFronterList)
-print(getChainAllFronterInfo("token.json"))
