@@ -65,7 +65,8 @@ def getAllFronterInfo(fronterList, customFronterList, UID):
         name = content["content"]["name"]
         avatar = content["content"]["avatarUrl"]
         pronouns = content["content"]["pronouns"]
-        fronterListConc.append((name, avatar, pronouns))
+        description = content["content"]["desc"]
+        fronterListConc.append((name, avatar, pronouns, description))
     for i in range(len(customFronterList)):
         response = requests.get(
             f"{SIMPLY_PLURAL_BASE_URL}/customfront/{UID}/{customFronterList[i]}",
@@ -96,5 +97,3 @@ token = getToken("token.json")
 # set up for making requests
 payload = {}
 headers = {"Authorization": token["SimplyPluralAPIKey"]}
-
-print(getChainAllFronterInfo())
