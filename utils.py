@@ -89,6 +89,12 @@ def getChainAllFronterInfo():
     allFronterList = getAllFronterInfo(fronterList, customFronterList, UID)
     return allFronterList
 
+# returns a list containing fronter information for those that match the query
+# looks for an exact case-insensitive match
+def findMemberByName(name):
+    allMembers = getChainAllFronterInfo()
+    match = [member for member in allMembers if member[0].lower() == name.lower()]
+    return match
 
 # here and below would be in other files
 # replace with your own path, start at the root of the project
