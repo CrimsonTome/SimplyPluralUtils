@@ -93,7 +93,7 @@ def getChainAllFronterInfo():
 # returns a list containing fronter information for those that match the query
 # looks for an exact case-insensitive match
 def findMemberByName(name):
-    allMembers = getChainAllFronterInfo()
+    allMembers = getChainAllMemberInfo()
     match = [member for member in allMembers if member[0].lower() == name.lower()]
     return match
 
