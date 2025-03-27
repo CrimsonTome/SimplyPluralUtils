@@ -50,6 +50,7 @@ def craftCustomFronterIDList(fronters):
 def getUID(fronters):
     return fronters[0]["content"]["uid"]
 
+
 def getNonCustomFronters(fronterList, UID):
     fronterListConc = []
     for i in range(len(fronterList)):
@@ -70,9 +71,10 @@ def getNonCustomFronters(fronterList, UID):
                     content["avatarUrl"],
                     content["pronouns"],
                     content["desc"],
+                )
             )
-        )
     return fronterListConc
+
 
 def getCustomFronters(customFronterList, UID):
     customFronterListConc = []
@@ -84,7 +86,6 @@ def getCustomFronters(customFronterList, UID):
             timeout=10,
         )
         customFronters = response.json()
-        
         content = customFronters["content"]
         customFronterListConc.append(
             (
@@ -118,7 +119,7 @@ def getAllFronterInfo(fronterList, customFronterList, UID):
                         content["pronouns"],
                         content["desc"],
                     )
-            )
+                )
     for i in range(len(customFronterList)):
         response = requests.get(
             f"{SIMPLY_PLURAL_BASE_URL}/customfront/{UID}/{customFronterList[i]}",
@@ -140,6 +141,7 @@ def getChainNonCustomFronterInfo():
     fronterList = getNonCustomFronters(fronterIDList, UID)
     return fronterList
 
+
 # TODO: this is currently broken. need to fix later
 def getChainCustomFronterInfo():
     customFronterIDs = getAllFronterID()
@@ -148,12 +150,14 @@ def getChainCustomFronterInfo():
     customFronterList = getCustomFronters(customFronterIDList, UID)
     return customFronterList
 
+
 # returns a list containing fronter information for those that match the query
 # looks for an exact case-insensitive match
 def findMemberByName(name):
     allMembers = getChainAllMemberInfo()
     match = [member for member in allMembers if member[0].lower() == name.lower()]
     return match
+
 
 # get account UID from /me endpoint
 def getMe():
@@ -206,6 +210,3 @@ token = getToken("token.json")
 # set up for making requests
 payload = {}
 headers = {"Authorization": token["SimplyPluralAPIKey"]}
-
-all = getChainCustomFronterInfo()
-print(all)
