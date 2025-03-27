@@ -50,6 +50,50 @@ def craftCustomFronterIDList(fronters):
 def getUID(fronters):
     return fronters[0]["content"]["uid"]
 
+def getNonCustomFronters(fronterList, UID):
+    fronterListConc = []
+    for i in range(len(fronterList)):
+        response = requests.get(
+            f"{SIMPLY_PLURAL_BASE_URL}/member/{UID}/{fronterList[i]}",
+            headers=headers,
+            data=payload,
+            timeout=10,
+        )
+        fronters = response.json()
+        content = fronters["content"]
+        # check if the contents of pronouns after stripping whitespace is not empty
+        # do this to filter out test or uncomplete members
+        if content["pronouns"].strip():
+            fronterListConc.append(
+                (
+                    content["name"],
+                    content["avatarUrl"],
+                    content["pronouns"],
+                    content["desc"],
+            )
+        )
+    return fronterListConc
+
+def getCustomFronters(customFronterList, UID):
+    customFronterListConc = []
+    for i in range(len(customFronterList)):
+        response = requests.get(
+            f"{SIMPLY_PLURAL_BASE_URL}/customfront/{UID}/{customFronterList[i]}",
+            headers=headers,
+            data=payload,
+            timeout=10,
+        )
+        customFronters = response.json()
+        
+        content = customFronters["content"]
+        customFronterListConc.append(
+            (
+                content["name"],
+                content["avatarUrl"],
+                content["desc"],
+            )
+        )
+
 
 # returns a list of fronter names and avatar URLs from both the fronter list and custom fronter list
 def getAllFronterInfo(fronterList, customFronterList, UID):
@@ -61,12 +105,20 @@ def getAllFronterInfo(fronterList, customFronterList, UID):
             data=payload,
             timeout=10,
         )
-        content = response.json()
-        name = content["content"]["name"]
-        avatar = content["content"]["avatarUrl"]
-        pronouns = content["content"]["pronouns"]
-        description = content["content"]["desc"]
-        fronterListConc.append((name, avatar, pronouns, description))
+        fronters = response.json()
+        for member in fronters:
+            content = member["content"]
+            # check if the contents of pronouns after stripping whitespace is not empty
+            # do this to filter out test or uncomplete members
+            if content["pronouns"].strip():
+                fronterListConc.append(
+                    (
+                        content["name"],
+                        content["avatarUrl"],
+                        content["pronouns"],
+                        content["desc"],
+                    )
+            )
     for i in range(len(customFronterList)):
         response = requests.get(
             f"{SIMPLY_PLURAL_BASE_URL}/customfront/{UID}/{customFronterList[i]}",
@@ -81,14 +133,20 @@ def getAllFronterInfo(fronterList, customFronterList, UID):
     return fronterListConc
 
 
-def getChainAllFronterInfo():
-    fronters = getAllFronterID()
-    fronterList = craftFronterIDList(fronters)
-    customFronterList = craftCustomFronterIDList(fronters)
-    UID = getUID(fronters)
-    allFronterList = getAllFronterInfo(fronterList, customFronterList, UID)
-    return allFronterList
+def getChainNonCustomFronterInfo():
+    fronterIDs = getAllFronterID()
+    fronterIDList = craftFronterIDList(fronterIDs)
+    UID = getMe()
+    fronterList = getNonCustomFronters(fronterIDList, UID)
+    return fronterList
 
+# TODO: this is currently broken. need to fix later
+def getChainCustomFronterInfo():
+    customFronterIDs = getAllFronterID()
+    customFronterIDList = craftCustomFronterIDList(customFronterIDs)
+    UID = getMe()
+    customFronterList = getCustomFronters(customFronterIDList, UID)
+    return customFronterList
 
 # returns a list containing fronter information for those that match the query
 # looks for an exact case-insensitive match
@@ -122,6 +180,7 @@ def getAllMemberInfo(UID):
     for member in system:
         content = member["content"]
         # check if the contents of pronouns after stripping whitespace is not empty
+        # do this to filter out test or uncomplete members
         if content["pronouns"].strip():
             memberListConc.append(
                 (
@@ -147,3 +206,6 @@ token = getToken("token.json")
 # set up for making requests
 payload = {}
 headers = {"Authorization": token["SimplyPluralAPIKey"]}
+
+all = getChainCustomFronterInfo()
+print(all)
