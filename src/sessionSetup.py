@@ -1,4 +1,3 @@
-# return the token from the user's token file
 import json
 from pathlib import Path
 

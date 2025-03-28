@@ -1,4 +1,3 @@
-# returns a list of fronter IDs from the fronters list
 from src.common import getAllFronters
 from src.sessionSetup import SIMPLY_PLURAL_BASE_URL, headers, payload
 from src.user import getMe
