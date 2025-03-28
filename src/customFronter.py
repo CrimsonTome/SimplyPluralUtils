@@ -1,11 +1,9 @@
 # returns a list of custom fronter IDs from the fronters list
-from src.common import getAllFronterID
+from src.common import getAllFronters
 from src.sessionSetup import SIMPLY_PLURAL_BASE_URL, headers, payload
-
+from src.user import getMe
 
 import requests
-
-from src.user import getMe
 
 
 def craftCustomFronterIDList(fronters):
@@ -39,7 +37,7 @@ def getCustomFronters(customFronterList, UID):
 
 # TODO: this is currently broken. need to fix later
 def getChainCustomFronterInfo():
-    customFronterIDs = getAllFronterID()
+    customFronterIDs = getAllFronters()
     customFronterIDList = craftCustomFronterIDList(customFronterIDs)
     UID = getMe()
     customFronterList = getCustomFronters(customFronterIDList, UID)

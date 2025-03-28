@@ -3,6 +3,7 @@ from src.sessionSetup import SIMPLY_PLURAL_BASE_URL, headers, payload
 
 import requests
 
+
 # returns the stripped system ID using the first fronter
 # you can also use the /me endpoint to get the system ID with some more filtering
 # this will fail if there are no fronters, prefer the newer getMe instead!

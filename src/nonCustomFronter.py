@@ -1,11 +1,9 @@
 # returns a list of fronter IDs from the fronters list
-from src.common import getAllFronterID
+from src.common import getAllFronters
 from src.sessionSetup import SIMPLY_PLURAL_BASE_URL, headers, payload
-
+from src.user import getMe
 
 import requests
-
-from src.user import getMe
 
 
 def craftFronterIDList(fronters):
@@ -43,7 +41,7 @@ def getNonCustomFronters(fronterList, UID):
 
 
 def getChainNonCustomFronterInfo():
-    fronterIDs = getAllFronterID()
+    fronterIDs = getAllFronters()
     fronterIDList = craftFronterIDList(fronterIDs)
     UID = getMe()
     fronterList = getNonCustomFronters(fronterIDList, UID)

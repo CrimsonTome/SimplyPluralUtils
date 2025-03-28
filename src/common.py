@@ -4,17 +4,14 @@ from src.user import getMe
 import requests
 
 
-
-
-# returns a list of all fronter IDs from the /fronters endpoint
+# returns a list of all fronter info from the /fronters endpoint
 # https://docs.apparyllis.com/docs/api/get-current-fronters-self
-def getAllFronterID():
+def getAllFronters():
     response = requests.get(
         f"{SIMPLY_PLURAL_BASE_URL}/fronters", headers=headers, data=payload, timeout=10
     )
     fronters = response.json()
     return fronters
-
 
 
 # returns a list of fronter names and avatar URLs from both the fronter list and custom fronter list
