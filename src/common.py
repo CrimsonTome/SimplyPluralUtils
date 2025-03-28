@@ -6,7 +6,7 @@ import requests
 
 def getAllFronters():
     """
-    Get a list of all fronter information 
+    Get a list of all fronter information
     and returns the response as a list of JSON.
     """
     response = requests.get(
@@ -70,7 +70,7 @@ def getChainAllMemberInfo():
     Retrieve information for all members in a system.
 
     Returns:
-        AllMemberInfo (list): A list of all member information 
+        AllMemberInfo (list): A list of all member information
         retrieved by getAllMemberInfo.
     """
     UID = getMe()
@@ -101,7 +101,7 @@ def getAllMemberInfo(UID):
         UID (str): The unique identifier of the authenticated user.
 
     Returns:
-        AllMemberInfo (list): A list of all member information. 
+        AllMemberInfo (list): A list of all member information.
     """
     memberListConc = []
     response = requests.get(

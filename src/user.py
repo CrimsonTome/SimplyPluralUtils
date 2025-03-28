@@ -12,11 +12,11 @@ def getUID(fronters):
         fronters(list): A list of the current fronters with all their attributes.
 
     Returns:
-        UID(str): the unique identifier, also known as the system ID
+        UID(str): the unique identifier, also known as the system ID.
 
-    Notes: 
+    Notes:
         It is not recommended to use this method,
-        if there are no fronters it will fail. Prefer getMe instead
+        if there are no fronters it will fail. Prefer getMe instead.
     """
     UID = fronters[0]["content"]["uid"]
     return UID
