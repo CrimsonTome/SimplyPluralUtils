@@ -4,15 +4,26 @@ from src.sessionSetup import SIMPLY_PLURAL_BASE_URL, headers, payload
 import requests
 
 
-# returns the stripped system ID using the first fronter
-# you can also use the /me endpoint to get the system ID with some more filtering
-# this will fail if there are no fronters, prefer the newer getMe instead!
 def getUID(fronters):
-    return fronters[0]["content"]["uid"]
+    """
+    Get the unique identifier for an authenticated user.
+
+    Parameters:
+        fronters(list): A list of the current fronters with all their attributes.
+
+    Returns:
+        UID(str): the unique identifier, also known as the system ID
+
+    Notes: 
+        It is not recommended to use this method,
+        if there are no fronters it will fail. Prefer getMe instead
+    """
+    UID = fronters[0]["content"]["uid"]
+    return UID
 
 
-# get account UID from /me endpoint
 def getMe():
+    """Get the unique identifier for an authenticated user."""
     response = requests.get(
         f"{SIMPLY_PLURAL_BASE_URL}/me",
         headers=headers,

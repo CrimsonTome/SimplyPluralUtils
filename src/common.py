@@ -71,7 +71,7 @@ def getChainAllMemberInfo():
 
     Returns:
         AllMemberInfo (list): A list of all member information 
-        retrieved by `getAllMemberInfo`.
+        retrieved by getAllMemberInfo.
     """
     UID = getMe()
     AllMemberInfo = getAllMemberInfo(UID)
