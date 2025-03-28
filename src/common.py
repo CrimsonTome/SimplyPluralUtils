@@ -7,7 +7,7 @@ import requests
 def getAllFronters():
     """
     Get a list of all fronter information 
-    and returns the response as a list of JSON
+    and returns the response as a list of JSON.
     """
     response = requests.get(
         f"{SIMPLY_PLURAL_BASE_URL}/fronters", headers=headers, data=payload, timeout=10
@@ -27,7 +27,7 @@ def getAllFronterInfo(fronterList, customFronterList, UID):
         UID (str): The unique identifier of the authenticated user.
 
     Returns:
-        fronterListConc (list): A list of information on all fronters
+        fronterListConc (list): A list of information on all fronters.
     """
     fronterListConc = []
     for i in range(len(fronterList)):
@@ -94,6 +94,15 @@ def findMemberByName(name):
 
 
 def getAllMemberInfo(UID):
+    """
+    Get information for all members in the system.
+
+    Parameters:
+        UID (str): The unique identifier of the authenticated user.
+
+    Returns:
+        AllMemberInfo (list): A list of all member information. 
+    """
     memberListConc = []
     response = requests.get(
         f"{SIMPLY_PLURAL_BASE_URL}/members/{UID}",
