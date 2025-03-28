@@ -4,9 +4,11 @@ from src.user import getMe
 import requests
 
 
-# returns a list of all fronter info from the /fronters endpoint
-# https://docs.apparyllis.com/docs/api/get-current-fronters-self
 def getAllFronters():
+    """
+    Get a list of all fronter information 
+    and returns the response as a list of JSON
+    """
     response = requests.get(
         f"{SIMPLY_PLURAL_BASE_URL}/fronters", headers=headers, data=payload, timeout=10
     )
@@ -14,8 +16,19 @@ def getAllFronters():
     return fronters
 
 
-# returns a list of fronter names and avatar URLs from both the fronter list and custom fronter list
 def getAllFronterInfo(fronterList, customFronterList, UID):
+    """
+    Gets specific information about regular and custom fronters
+    and returns the joined list.
+
+    Parameters:
+        fronterList (list): List of regular fronter IDs.
+        customFronterList (list): List of custom fronter IDs.
+        UID (str): The unique identifier of the authenticated user.
+
+    Returns:
+        fronterListConc (list): A list of information on all fronters
+    """
     fronterListConc = []
     for i in range(len(fronterList)):
         response = requests.get(
@@ -53,14 +66,28 @@ def getAllFronterInfo(fronterList, customFronterList, UID):
 
 
 def getChainAllMemberInfo():
+    """
+    Retrieve information for all members in a system.
+
+    Returns:
+        AllMemberInfo (list): A list of all member information 
+        retrieved by `getAllMemberInfo`.
+    """
     UID = getMe()
     AllMemberInfo = getAllMemberInfo(UID)
     return AllMemberInfo
 
 
-# returns a list containing fronter information for those that match the query
-# looks for an exact case-insensitive match
 def findMemberByName(name):
+    """
+    Search for members by name with an exact case-insensitive match
+
+    Parameters:
+        name (str): The name to search for.
+
+    Returns:
+        match (list): A list of members matching the provided name
+    """
     allMembers = getChainAllMemberInfo()
     match = [member for member in allMembers if member[0].lower() == name.lower()]
     return match
