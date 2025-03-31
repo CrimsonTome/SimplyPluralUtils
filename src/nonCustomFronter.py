@@ -6,15 +6,35 @@ import requests
 
 
 def craftFronterIDList(fronters):
-    fronter_id_list = [
+    """
+    Extract the non custom fronter IDs from information on them.
+
+    Paramaters:
+        fronters(list): A list of dictionaries containing fronter information.
+
+    Returns:
+        fronterID(list): A list of member IDs for non custom fronters.
+    """
+    fronterIDList = [
         item["content"]["member"]
         for item in fronters
         if not item["content"].get("custom", False)
     ]
-    return fronter_id_list
+    return fronterIDList
 
 
 def getNonCustomFronters(fronterList, UID):
+    """
+    Gets specific information about non fronters 
+    and returns the joined list.
+
+    Parameters:
+        fronterList (list): List of non custom fronter IDs.
+        UID (str): The unique identifier of the authenticated user.
+
+    Returns:
+        fronterListConc (list): A list of information on non custom fronters.
+    """
     fronterListConc = []
     for i in range(len(fronterList)):
         response = requests.get(
@@ -40,6 +60,9 @@ def getNonCustomFronters(fronterList, UID):
 
 
 def getChainNonCustomFronterInfo():
+    """
+    Chain multiple function calls to fetch custom fronter details.    
+    """
     fronterIDs = getAllFronters()
     fronterIDList = craftFronterIDList(fronterIDs)
     UID = getMe()
