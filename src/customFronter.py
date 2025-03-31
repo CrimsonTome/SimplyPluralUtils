@@ -1,4 +1,3 @@
-# returns a list of custom fronter IDs from the fronters list
 from src.common import getAllFronters
 from src.sessionSetup import SIMPLY_PLURAL_BASE_URL, headers, payload
 from src.user import getMe
@@ -6,16 +5,38 @@ from src.user import getMe
 import requests
 
 
+# Note: Some things here are broken and need to be investigated
+
 def craftCustomFronterIDList(fronters):
-    custom_fronter_id_list = [
+    """
+    Extract the custom fronter IDs from information on them.
+
+    Paramaters:
+        fronters(list): A list of dictionaries containing fronter information.
+
+    Returns:
+        customFronterIDList(list): A list of member IDs for custom fronters.
+    """
+    customFronterIDList = [
         item["content"]["member"]
         for item in fronters
         if item["content"].get("custom", False)
     ]
-    return custom_fronter_id_list
+    return customFronterIDList
 
 
 def getCustomFronters(customFronterList, UID):
+    """
+    Gets specific information about custom fronters 
+    and returns the joined list.
+
+    Parameters:
+        customFronterList (list): List of custom fronter IDs.
+        UID (str): The unique identifier of the authenticated user.
+
+    Returns:
+        customFronterListConc (list): A list of information on custom fronters.
+    """
     customFronterListConc = []
     for i in range(len(customFronterList)):
         response = requests.get(
@@ -35,8 +56,10 @@ def getCustomFronters(customFronterList, UID):
         )
 
 
-# TODO: this is currently broken. need to fix later
 def getChainCustomFronterInfo():
+    """
+    Chain multiple function calls to fetch custom fronter details.    
+    """
     customFronterIDs = getAllFronters()
     customFronterIDList = craftCustomFronterIDList(customFronterIDs)
     UID = getMe()
