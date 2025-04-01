@@ -1,6 +1,6 @@
-from src.common import getAllFronters
-from src.sessionSetup import SIMPLY_PLURAL_BASE_URL, headers, payload
-from src.user import getMe
+from common import getAllFronters
+from sessionSetup import SIMPLY_PLURAL_BASE_URL, headers, payload
+from user import getMe
 
 import requests
 
