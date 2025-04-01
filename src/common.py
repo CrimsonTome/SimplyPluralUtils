@@ -90,7 +90,7 @@ def findMemberByName(name):
     """
     allMembers = getChainAllMemberInfo()
     match = [member for member in allMembers if member[0].lower() == name.lower()]
-    return match
+    return match[0]
 
 
 def getAllMemberInfo(UID):
