@@ -1,4 +1,4 @@
-from src.sessionSetup import SIMPLY_PLURAL_BASE_URL, headers, payload
+from sessionSetup import SIMPLY_PLURAL_BASE_URL, headers, payload
 
 
 import requests

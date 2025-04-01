@@ -1,5 +1,5 @@
-from src.sessionSetup import SIMPLY_PLURAL_BASE_URL, headers, payload
-from src.user import getMe
+from sessionSetup import SIMPLY_PLURAL_BASE_URL, headers, payload
+from user import getMe
 
 import requests
 

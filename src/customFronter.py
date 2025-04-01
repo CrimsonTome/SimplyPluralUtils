@@ -7,6 +7,7 @@ import requests
 
 # Note: Some things here are broken and need to be investigated
 
+
 def craftCustomFronterIDList(fronters):
     """
     Extract the custom fronter IDs from information on them.
@@ -27,7 +28,7 @@ def craftCustomFronterIDList(fronters):
 
 def getCustomFronters(customFronterList, UID):
     """
-    Gets specific information about custom fronters 
+    Gets specific information about custom fronters
     and returns the joined list.
 
     Parameters:
@@ -58,7 +59,7 @@ def getCustomFronters(customFronterList, UID):
 
 def getChainCustomFronterInfo():
     """
-    Chain multiple function calls to fetch custom fronter details.    
+    Chain multiple function calls to fetch custom fronter details.
     """
     customFronterIDs = getAllFronters()
     customFronterIDList = craftCustomFronterIDList(customFronterIDs)

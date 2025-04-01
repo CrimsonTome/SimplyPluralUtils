@@ -1,6 +1,6 @@
-from src.common import getAllFronters
-from src.sessionSetup import SIMPLY_PLURAL_BASE_URL, headers, payload
-from src.user import getMe
+from common import getAllFronters
+from sessionSetup import SIMPLY_PLURAL_BASE_URL, headers, payload
+from user import getMe
 
 import requests
 
@@ -25,7 +25,7 @@ def craftFronterIDList(fronters):
 
 def getNonCustomFronters(fronterList, UID):
     """
-    Gets specific information about non fronters 
+    Gets specific information about non fronters
     and returns the joined list.
 
     Parameters:
@@ -61,7 +61,7 @@ def getNonCustomFronters(fronterList, UID):
 
 def getChainNonCustomFronterInfo():
     """
-    Chain multiple function calls to fetch custom fronter details.    
+    Chain multiple function calls to fetch custom fronter details.
     """
     fronterIDs = getAllFronters()
     fronterIDList = craftFronterIDList(fronterIDs)
