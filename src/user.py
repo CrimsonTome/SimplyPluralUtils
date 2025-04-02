@@ -33,3 +33,15 @@ def getMe():
     data = response.json()
     UID = data["id"]
     return UID
+
+def getSystemDescription():
+    response = requests.get(
+        f"{SIMPLY_PLURAL_BASE_URL}/me",
+        headers=headers,
+        data=payload,
+        timeout=10,
+    )
+    data = response.json()
+    content = data["content"]
+    description = content["desc"]
+    return description
