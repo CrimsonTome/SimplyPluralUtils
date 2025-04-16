@@ -34,6 +34,7 @@ def getMe():
     UID = data["id"]
     return UID
 
+
 def getSystemDescription():
     response = requests.get(
         f"{SIMPLY_PLURAL_BASE_URL}/me",

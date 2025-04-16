@@ -47,15 +47,16 @@ def getNonCustomFronters(fronterList, UID):
         content = fronters["content"]
         # check if the contents of pronouns after stripping whitespace is not empty
         # do this to filter out test or uncomplete members
-        if content["pronouns"].strip():
-            fronterListConc.append(
-                (
-                    content["name"],
-                    content["avatarUrl"],
-                    content["pronouns"],
-                    content["desc"],
+        if "pronouns" in content:
+            if content["pronouns"].strip():
+                fronterListConc.append(
+                    (
+                        content["name"],
+                        content["avatarUrl"],
+                        content["pronouns"],
+                        content["desc"],
+                    )
                 )
-            )
     return fronterListConc
 
 
