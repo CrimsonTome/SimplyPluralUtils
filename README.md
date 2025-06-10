@@ -22,8 +22,9 @@ In order to get data from Simply Plural you will need to rename the `secrets.exa
 {
     "SimplyPluralAPIKey": "your_api_key_here"
 }
+```
 
-Run `uv sync` to install the dependencies and `uv run utils.py` to run the code.
+Run `uv sync` to install the dependencies. You will need to make your own tests file to call the code from (sample tests may be added later)
 
 ## License
 
