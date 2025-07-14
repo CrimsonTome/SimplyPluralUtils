@@ -129,3 +129,25 @@ def getAllMemberInfo(UID):
                     )
                 )
     return memberListConc
+
+
+def getFriendFronters(FUID):
+    """
+    Get current fronters of a friend
+
+    Parameters:
+        FUID (str): The unique identifier of the friend.
+
+    Returns:
+        friendFronters (str): A list (handled as a string) of the current fronters
+        of the friend
+    """
+    response = requests.get(
+        f"{SIMPLY_PLURAL_BASE_URL}/friend/{FUID}/getFrontValue",
+        headers=headers,
+        data=payload,
+        timeout=10,
+    )
+    content = response.json()
+    friendFronters = content["frontString"]
+    return friendFronters
