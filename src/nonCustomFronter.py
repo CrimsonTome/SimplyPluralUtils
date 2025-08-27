@@ -1,4 +1,4 @@
-from common import getAllFronters
+from common import getAllFronters, getGroupMemberIDs
 from sessionSetup import SIMPLY_PLURAL_BASE_URL, headers, payload
 from user import getMe
 
@@ -60,12 +60,18 @@ def getNonCustomFronters(fronterList, UID):
     return fronterListConc
 
 
-def getChainNonCustomFronterInfo():
+def getChainNonCustomFronterInfo(GUID=None):
     """
     Chain multiple function calls to fetch custom fronter details.
     """
     fronterIDs = getAllFronters()
     fronterIDList = craftFronterIDList(fronterIDs)
     UID = getMe()
+    if GUID:
+        excluded_ids = getGroupMemberIDs(UID, GUID)
+        fronterIDList = [
+            member_id for member_id in fronterIDList
+            if member_id not in excluded_ids
+        ]
     fronterList = getNonCustomFronters(fronterIDList, UID)
     return fronterList

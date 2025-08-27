@@ -151,3 +151,24 @@ def getFriendFronters(FUID):
     content = response.json()
     friendFronters = content["frontString"]
     return friendFronters
+
+def getGroupMemberIDs(UID, GUID):
+    response = requests.get(
+        f"{SIMPLY_PLURAL_BASE_URL}/group/{UID}/{GUID}",
+        headers=headers,
+        data=payload,
+        timeout=10,
+    )
+    groupData = response.json()
+    return groupData["content"]["members"]
+
+def getFrontersNotInGroup(UID, GUID):
+    allFronters = getAllFronters()
+    excluded = getGroupMemberIDs(UID, GUID)
+
+    filteredIDs = [
+        member["content"]["member"]
+        for member in allFronters
+        if member["content"]["member"] not in excluded
+    ]
+    return filteredIDs
