@@ -2,6 +2,8 @@
 
 > Utilities for working with the Simply Plural API with Python
 
+# Archived, Simply Plural [was discontinued on 1st July 2026](https://apparyllis.com/simply-plural-will-be-discontinued.html)
+
 ## System requirements
 
 - Python 3.8 or higher is required to run the tools (tested with 3.13). You can check your Python version by running `python --version` in your terminal. You can install it using your package manager or from the [Python website](https://www.python.org/downloads/). 
